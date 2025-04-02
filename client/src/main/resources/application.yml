@@ -1,0 +1,40 @@
+server:
+  port: 8081
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application:
+    name: mcp
+  main:
+    web-application-type: none
+  ai:
+    dashscope:
+      api-key: sk-355440e3221a4ff6a1de7a4b63717b11
+
+      chat:
+        options:
+          model: qwq-plus
+
+    mcp:
+      client:
+        sse:
+          connections:
+            server1:
+              url: http://localhost:8080
+  mandatory-file-encoding: UTF-8
+
+# 调试日志
+logging:
+  level:
+    io:
+      modelcontextprotocol:
+        client: DEBUG
+        spec: DEBUG
+    org:
+      springframework:
+        ai:
+          mcp: DEBUG
