@@ -10,7 +10,7 @@ spring:
   application:
     name: mcp
   main:
-    web-application-type: none
+    web-application-type: servlet  # 必须启用web应用类型
   ai:
     dashscope:
       api-key: sk-355440e3221a4ff6a1de7a4b63717b11

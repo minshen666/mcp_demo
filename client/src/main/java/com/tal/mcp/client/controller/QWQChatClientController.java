@@ -1,5 +1,8 @@
 package com.tal.mcp.client.controller;
 
+import java.time.Duration;
+import reactor.core.publisher.Flux;
+import java.util.concurrent.TimeoutException;
 import com.alibaba.cloud.ai.dashscope.chat.DashScopeChatOptions;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -48,8 +51,10 @@ public class QWQChatClientController {
     @GetMapping("/stream/chat")
     public Flux<String> streamChat(HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");
-        return chatClient.prompt("今天北京天气如何，我的余额还有多少")
+        return chatClient.prompt("今天北京天气如何,北京的纬度39.9，经度116.4;我的余额还有多少")
                 .stream()
-                .content();
+                .content()
+                //todo 超时设置未生效
+                .timeout(Duration.ofSeconds(60));
     }
 }
