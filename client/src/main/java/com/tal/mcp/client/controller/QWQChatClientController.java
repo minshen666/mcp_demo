@@ -24,7 +24,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class QWQChatClientController {
     private ChatModel chatModel;
    private  ChatClient chatClient;
-    public QWQChatClientController(ChatModel chatModel, ToolCallbackProvider tools ) {
+    public QWQChatClientController(ChatModel chatModel, ToolCallbackProvider tools) {
         this.chatModel = chatModel;
 
         // 构造时，可以设置 ChatClient 的参数
@@ -49,12 +49,9 @@ public class QWQChatClientController {
                 .build();
     }
     @GetMapping("/stream/chat")
-    public Flux<String> streamChat(HttpServletResponse response) {
-        response.setCharacterEncoding("UTF-8");
+    public Flux<String> streamChat() {
         return chatClient.prompt("今天北京天气如何,北京的纬度39.9，经度116.4;我的余额还有多少")
                 .stream()
-                .content()
-                //todo 超时设置未生效
-                .timeout(Duration.ofSeconds(60));
+                .content();
     }
 }
